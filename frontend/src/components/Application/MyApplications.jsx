@@ -198,10 +198,10 @@ const handleApproveApplication = async (applicationId) => {
     // Send email using emailjs
     try {
       await emailjs.send(
-        "service_d64b59c",
-        "template_miesmij",
+       "PROCESS.ENV.EMAILJS_SERVICE_ID",
+        "PROCESS.ENV.EMAILJS_SERVICE_ID",
         templateParams,
-        "fkUdRu0hX-et6yl5z"
+        "PROCESS.ENV.EMAILJS_TEMPLATE_ID_2"
       );
       console.log("Email sent successfully!");
     } catch (emailError) {
@@ -255,10 +255,10 @@ const handleRejectApplication = async (applicationId) => {
     // Send email using emailjs
     try {
       await emailjs.send(
-        "service_d64b59c",
-        "template_is6jfnh",
+        "PROCESS.ENV.EMAILJS_SERVICE_ID",
+        "PROCESS.ENV.EMAILJS_SERVICE_ID",
         templateParams,
-        "fkUdRu0hX-et6yl5z"
+        "PROCESS.ENV.EMAILJS_TEMPLATE_ID_1"
       );
       console.log("Email sent successfully!");
     } catch (emailError) {
