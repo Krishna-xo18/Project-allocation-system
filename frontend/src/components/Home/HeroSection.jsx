@@ -5,26 +5,21 @@ const HeroSection = () => {
   const details = [
     {
       id: 1,
-      title: "1,23,441",
-      subTitle: "Live Job",
+      title: "200+",
+      subTitle: "Live Projects",
       icon: <FaSuitcase />,
     },
-    {
-      id: 2,
-      title: "91220",
-      subTitle: "Companies",
-      icon: <FaBuilding />,
-    },
+
     {
       id: 3,
-      title: "2,34,200",
-      subTitle: "Job Seekers",
+      title: "1000+",
+      subTitle: "Students",
       icon: <FaUsers />,
     },
     {
       id: 4,
-      title: "1,03,761",
-      subTitle: "Employers",
+      title: "100+",
+      subTitle: "Faculties",
       icon: <FaUserPlus />,
     },
   ];
@@ -33,12 +28,12 @@ const HeroSection = () => {
       <div className="heroSection">
         <div className="container">
           <div className="title">
-            <h1>Find a job that suits</h1>
-            <h1>your interests and skills</h1>
+            <h1>Project Hunt Made Easy</h1>
+            <h1>Skip the Runaround, Apply Directly!</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              voluptate repellat modi quidem aliquid eaque ducimus ipsa et,
-              facere mollitia!
+              Welcome! Tired of chasing projects across faculties? Here, find
+              all current opportunities in one place. Apply directly and
+              streamline your project search today!"
             </p>
           </div>
           <div className="image">

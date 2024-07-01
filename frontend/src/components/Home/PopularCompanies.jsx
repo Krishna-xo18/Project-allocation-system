@@ -1,35 +1,40 @@
 import React from "react";
-import { FaMicrosoft, FaApple } from "react-icons/fa";
-import { SiTesla } from "react-icons/si";
 
+import { FaMicrosoft, FaApple } from "react-icons/fa";
+import { SiTesla, SiPython } from "react-icons/si";
+import { AiFillHtml5 } from "react-icons/ai";
+import { IoMdAnalytics } from "react-icons/io";
 const PopularCompanies = () => {
   const companies = [
     {
       id: 1,
-      title: "Microsoft",
-      location: "Street 10 Banglore,India",
-      openPositions: 10,
+      title: "AI Research",
+      openPositions: 8,
       icon: <FaMicrosoft />,
     },
     {
       id: 2,
-      title: "Tesla",
-      location: "Street 10 Banglore,India",
+      title: "Machine Learning",
       openPositions: 5,
-      icon: <SiTesla />,
+      icon: <SiPython />,
     },
     {
       id: 3,
-      title: "Apple",
-      location: "Street 10 Banglore,India",
-      openPositions: 20,
-      icon: <FaApple />,
+      title: "Web Development",
+      openPositions: 10,
+      icon: <AiFillHtml5 />,
+    },
+    {
+      id: 4,
+      title: "Data Science",
+      openPositions: 7,
+      icon: <IoMdAnalytics />,
     },
   ];
   return (
     <div className="companies">
       <div className="container">
-        <h3>TOP COMPANIES</h3>
+        <h3>TOP DOMAINS</h3>
         <div className="banner">
           {companies.map((element) => {
             return (

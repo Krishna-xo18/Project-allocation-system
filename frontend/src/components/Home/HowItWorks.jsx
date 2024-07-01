@@ -8,30 +8,32 @@ const HowItWorks = () => {
     <>
       <div className="howitworks">
         <div className="container">
-          <h3>How JobZee Works</h3>
+          <h3>How Project Allocation System Works</h3>
           <div className="banner">
             <div className="card">
               <FaUserPlus />
               <p>Create Account</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Login or register using your official LNMMITT domain address for
+                streamlined access to exclusive project opportunities and
+                updates.
               </p>
             </div>
             <div className="card">
               <MdFindInPage />
-              <p>Find a Job/Post a Job</p>
+              <p>Find a Project/Post a Project</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Discover existing projects or post new ones to connect with
+                collaborators and bring innovative ideas to life efficiently
               </p>
             </div>
             <div className="card">
               <IoMdSend />
-              <p>Apply For Job/Recruit Suitable Candidates</p>
+              <p>Apply For Project/Allocate Project to Suitable Candidates</p>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur, culpa.
+                Apply for projects or allocate them to suitable candidates
+                efficiently, ensuring a seamless workflow and successful project
+                outcomes
               </p>
             </div>
           </div>

@@ -43,11 +43,11 @@ const applicationSchema = new mongoose.Schema({
     },
     role: {
       type: String,
-      enum: ["Job Seeker"],
+      enum: ["Student"],
       required: true,
     },
   },
-  employerID: {
+  facultyID: {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -55,9 +55,23 @@ const applicationSchema = new mongoose.Schema({
     },
     role: {
       type: String,
-      enum: ["Employer"],
+      enum: ["Faculty"],
       required: true,
     },
+  },
+  projectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  branch: {
+    type: String,
+    required: true,
+  },
+  cgpa: {
+    type: Number,
+    required: true,
+    min: [4.0, "CGPA must be at least 4.0"],
+    max: [10.0, "CGPA must be at most 10.0"],
   },
 });
 

@@ -6,36 +6,36 @@ import { RxCross2 } from "react-icons/rx";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
 
-const MyJobs = () => {
-  const [myJobs, setMyJobs] = useState([]);
+const MyProjects = () => {
+  const [myProjects, setMyProjects] = useState([]);
   const [editingMode, setEditingMode] = useState(null);
   const { isAuthorized, user } = useContext(Context);
 
   const navigateTo = useNavigate();
-  //Fetching all jobs
+  //Fetching all Projects
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchProjects = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/job/getmyjobs",
+          "https://project-app-backend-1hcz.onrender.com/api/v1/project/getmyprojects",
           { withCredentials: true }
         );
-        setMyJobs(data.myJobs);
+        setMyProjects(data.myProjects);
       } catch (error) {
         toast.error(error.response.data.message);
-        setMyJobs([]);
+        setMyProjects([]);
       }
     };
-    fetchJobs();
+    fetchProjects();
   }, []);
-  if (!isAuthorized || (user && user.role !== "Employer")) {
+  if (!isAuthorized || (user && user.role !== "Faculty")) {
     navigateTo("/");
   }
 
   //Function For Enabling Editing Mode
-  const handleEnableEdit = (jobId) => {
+  const handleEnableEdit = (projectId) => {
     //Here We Are Giving Id in setEditingMode because We want to enable only that job whose ID has been send.
-    setEditingMode(jobId);
+    setEditingMode(projectId);
   };
 
   //Function For Disabling Editing Mode
@@ -44,12 +44,18 @@ const MyJobs = () => {
   };
 
   //Function For Updating The Job
-  const handleUpdateJob = async (jobId) => {
-    const updatedJob = myJobs.find((job) => job._id === jobId);
+  const handleUpdateProject = async (projectId) => {
+    const updatedProject = myProjects.find(
+      (project) => project._id === projectId
+    );
     await axios
-      .put(`http://localhost:4000/api/v1/job/update/${jobId}`, updatedJob, {
-        withCredentials: true,
-      })
+      .put(
+        `http://localhost:4000/api/v1/project/update/${projectId}`,
+        updatedProject,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         toast.success(res.data.message);
         setEditingMode(null);
@@ -60,25 +66,27 @@ const MyJobs = () => {
   };
 
   //Function For Deleting Job
-  const handleDeleteJob = async (jobId) => {
+  const handleDeleteProject = async (projectId) => {
     await axios
-      .delete(`http://localhost:4000/api/v1/job/delete/${jobId}`, {
+      .delete(`http://localhost:4000/api/v1/project/delete/${projectId}`, {
         withCredentials: true,
       })
       .then((res) => {
         toast.success(res.data.message);
-        setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+        setMyJobs((prevProjects) =>
+          prevProjects.filter((project) => project._id !== projectId)
+        );
       })
       .catch((error) => {
         toast.error(error.response.data.message);
       });
   };
 
-  const handleInputChange = (jobId, field, value) => {
+  const handleInputChange = (projectId, field, value) => {
     // Update the job object in the jobs state with the new value
-    setMyJobs((prevJobs) =>
-      prevJobs.map((job) =>
-        job._id === jobId ? { ...job, [field]: value } : job
+    setMyJobs((prevProjects) =>
+      prevProjects.map((project) =>
+        project._id === projectId ? { ...project, [field]: value } : project
       )
     );
   };
@@ -87,11 +95,11 @@ const MyJobs = () => {
     <>
       <div className="myJobs page">
         <div className="container">
-          <h1>Your Posted Jobs</h1>
-          {myJobs.length > 0 ? (
+          <h1>Your Posted Projects</h1>
+          {myProjects.length > 0 ? (
             <>
               <div className="banner">
-                {myJobs.map((element) => (
+                {myProjects.map((element) => (
                   <div className="card" key={element._id}>
                     <div className="content">
                       <div className="short_fields">
@@ -131,17 +139,17 @@ const MyJobs = () => {
                           />
                         </div>
                         <div>
-                          <span>City:</span>
+                          <span>CGPA:</span>
                           <input
                             type="text"
                             disabled={
                               editingMode !== element._id ? true : false
                             }
-                            value={element.city}
+                            value={element.cgpa}
                             onChange={(e) =>
                               handleInputChange(
                                 element._id,
-                                "city",
+                                "cgpa",
                                 e.target.value
                               )
                             }
@@ -197,21 +205,8 @@ const MyJobs = () => {
                         <div>
                           <span>
                             Salary:{" "}
-                            {element.fixedSalary ? (
-                              <input
-                                type="number"
-                                disabled={
-                                  editingMode !== element._id ? true : false
-                                }
-                                value={element.fixedSalary}
-                                onChange={(e) =>
-                                  handleInputChange(
-                                    element._id,
-                                    "fixedSalary",
-                                    e.target.value
-                                  )
-                                }
-                              />
+                            {!element.salaryFrom ? (
+                              <></>
                             ) : (
                               <div>
                                 <input
@@ -286,9 +281,9 @@ const MyJobs = () => {
                           />
                         </div>
                         <div>
-                          <span>Location: </span>
+                          <span>Duration: </span>
                           <textarea
-                            value={element.location}
+                            value={element.duration}
                             rows={5}
                             disabled={
                               editingMode !== element._id ? true : false
@@ -296,7 +291,7 @@ const MyJobs = () => {
                             onChange={(e) =>
                               handleInputChange(
                                 element._id,
-                                "location",
+                                "duration",
                                 e.target.value
                               )
                             }
@@ -310,7 +305,7 @@ const MyJobs = () => {
                         {editingMode === element._id ? (
                           <>
                             <button
-                              onClick={() => handleUpdateJob(element._id)}
+                              onClick={() => handleUpdateProject(element._id)}
                               className="check_btn"
                             >
                               <FaCheck />
@@ -332,7 +327,7 @@ const MyJobs = () => {
                         )}
                       </div>
                       <button
-                        onClick={() => handleDeleteJob(element._id)}
+                        onClick={() => handleDeleteProject(element._id)}
                         className="delete_btn"
                       >
                         Delete
@@ -344,7 +339,8 @@ const MyJobs = () => {
             </>
           ) : (
             <p>
-              You've not posted any job or may be you deleted all of your jobs!
+              You've not posted any project or may be you deleted all of your
+              Projects!
             </p>
           )}
         </div>
@@ -353,4 +349,4 @@ const MyJobs = () => {
   );
 };
 
-export default MyJobs;
+export default MyProjects;

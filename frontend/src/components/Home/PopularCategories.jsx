@@ -1,64 +1,112 @@
 import React from "react";
 import {
+  MdCloud,
+  MdMemory,
+  MdWeb,
   MdOutlineDesignServices,
-  MdOutlineWebhook,
-  MdAccountBalance,
-  MdOutlineAnimation,
+  MdNetworkCheck,
+  MdOutlineSettings,
 } from "react-icons/md";
-import { TbAppsFilled } from "react-icons/tb";
-import { FaReact } from "react-icons/fa";
-import { GiArtificialIntelligence } from "react-icons/gi";
-import { IoGameController } from "react-icons/io5";
+import {
+  FaMicrochip,
+  FaDatabase,
+  FaRobot,
+  FaCog,
+  FaRss,
+  FaWrench,
+} from "react-icons/fa";
 
 const PopularCategories = () => {
   const categories = [
     {
       id: 1,
-      title: "Graphics & Design",
-      subTitle: "305 Open Positions",
-      icon: <MdOutlineDesignServices />,
+      title: "Cloud Computing",
+      subTitle: "Computer Science and Engineering",
+      icon: <MdCloud />,
     },
     {
       id: 2,
-      title: "Mobile App Development",
-      subTitle: "500 Open Positions",
-      icon: <TbAppsFilled />,
+      title: "AI/ML",
+      subTitle: "Computer Science and Engineering",
+      icon: <MdMemory />,
     },
     {
       id: 3,
-      title: "Frontend Web Development",
-      subTitle: "200 Open Positions",
-      icon: <MdOutlineWebhook />,
+      title: "Web Development",
+      subTitle: "Computer Science and Engineering",
+      icon: <MdWeb />,
     },
     {
       id: 4,
-      title: "MERN STACK Development",
-      subTitle: "1000+ Open Postions",
-      icon: <FaReact />,
+      title: "VLSI Design",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <MdOutlineDesignServices />,
     },
     {
       id: 5,
-      title: "Account & Finance",
-      subTitle: "150 Open Positions",
-      icon: <MdAccountBalance />,
+      title: "Digital Signal Processing",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <FaMicrochip />,
     },
     {
       id: 6,
-      title: "Artificial Intelligence",
-      subTitle: "867 Open Positions",
-      icon: <GiArtificialIntelligence />,
+      title: "Antenna Engineering",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <FaRss />,
     },
     {
       id: 7,
-      title: "Video Animation",
-      subTitle: "50 Open Positions",
-      icon: <MdOutlineAnimation />,
+      title: "Manufactural Design",
+      subTitle: "Mechanical Engineering",
+      icon: <FaCog />,
     },
     {
       id: 8,
-      title: "Game Development",
-      subTitle: "80 Open Positions",
-      icon: <IoGameController />,
+      title: "Robotics",
+      subTitle: "Mechanical Engineering",
+      icon: <FaRobot />,
+    },
+    {
+      id: 9,
+      title: "Microelectronics",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <FaMicrochip />,
+    },
+    {
+      id: 10,
+      title: "Nanotechnology",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <FaWrench />,
+    },
+    {
+      id: 11,
+      title: "Industrial Automation",
+      subTitle: "Mechanical Engineering",
+      icon: <FaCog />,
+    },
+    {
+      id: 12,
+      title: "Database Systems",
+      subTitle: "Computer Science and Engineering",
+      icon: <FaDatabase />,
+    },
+    {
+      id: 13,
+      title: "Network Security",
+      subTitle: "Computer Science and Engineering",
+      icon: <MdNetworkCheck />,
+    },
+    {
+      id: 14,
+      title: "Robotic Process Automation",
+      subTitle: "Computer Science and Engineering",
+      icon: <FaRobot />,
+    },
+    {
+      id: 15,
+      title: "Embedded Systems",
+      subTitle: "Electronics and Communication Engineering",
+      icon: <MdOutlineSettings />,
     },
   ];
   return (
@@ -70,7 +118,7 @@ const PopularCategories = () => {
             <div className="card" key={element.id}>
               <div className="icon">{element.icon}</div>
               <div className="text">
-                <p>{element.title}</p>
+                <h1>{element.title}</h1>
                 <p>{element.subTitle}</p>
               </div>
             </div>

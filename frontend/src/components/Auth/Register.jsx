@@ -15,15 +15,15 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
+  const [branch, setBranch] = useState("");
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
-        { name, phone, email, role, password },
+        "https://project-app-backend-1hcz.onrender.com/api/v1/user/register",
+        { name, phone, email, role, password, branch },
         {
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const Register = () => {
       <section className="authPage">
         <div className="container">
           <div className="header">
-            <img src="/JobZeelogo.png" alt="logo" />
+            <img src="/lg.png" alt="logo" />
             <h3>Create a new account</h3>
           </div>
           <form>
@@ -61,8 +61,32 @@ const Register = () => {
               <div>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
+                  <option value="Faculty">Faculty</option>
+                  <option value="Student">Student</option>
+                </select>
+                <FaRegUser />
+              </div>
+            </div>
+            <div className="inputTag">
+              <label>Branch or Department</label>
+              <div>
+                <select
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                >
+                  <option value="">Select Branch or Department</option>
+                  <option value="Communication and Computer Engineering (CCE)">
+                    Communication and Computer Engineering (CCE)
+                  </option>
+                  <option value="Electronics and Communication Engineering (ECE)">
+                    Electronics and Communication Engineering (ECE)
+                  </option>
+                  <option value="Computer Science Engineering (CSE)">
+                    Computer Science Engineering (CSE)
+                  </option>
+                  <option value="Mechanical Engineering (ME)">
+                    Mechanical Engineering (ME)
+                  </option>
                 </select>
                 <FaRegUser />
               </div>

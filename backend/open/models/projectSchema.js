@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const jobSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please provide a title."],
@@ -21,20 +21,7 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a country name."],
   },
-  city: {
-    type: String,
-    required: [true, "Please provide a city name."],
-  },
-  location: {
-    type: String,
-    required: [true, "Please provide location."],
-    minLength: [20, "Location must contian at least 20 characters!"],
-  },
-  fixedSalary: {
-    type: Number,
-    minLength: [4, "Salary must contain at least 4 digits"],
-    maxLength: [9, "Salary cannot exceed 9 digits"],
-  },
+
   salaryFrom: {
     type: Number,
     minLength: [4, "Salary must contain at least 4 digits"],
@@ -49,7 +36,7 @@ const jobSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  jobPostedOn: {
+  projectPostedOn: {
     type: Date,
     default: Date.now,
   },
@@ -58,6 +45,26 @@ const jobSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  facultyName: {
+    type: String,
+    required: true,
+  },
+  facultyDepartment: {
+    type: String,
+    required: true,
+  },
+  cgpa: {
+    type: Number,
+    required: true,
+    min: [4.0, "CGPA must be at least 4.0"],
+    max: [10.0, "CGPA must be at most 10.0"],
+  },
+  duration: {
+    type: Number,
+    required: true,
+    min: [1, "Duration must be at least for 1 month"],
+    max: [12, "Duration cannot be more than 12 months"],
+  },
 });
 
-export const Job = mongoose.model("Job", jobSchema);
+export const Project = mongoose.model("Project", projectSchema);

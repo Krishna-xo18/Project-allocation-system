@@ -9,6 +9,7 @@ const Application = () => {
   const [coverLetter, setCoverLetter] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [cgpa, setcgpa] = useState("");
   const [resume, setResume] = useState(null);
 
   const { isAuthorized, user } = useContext(Context);
@@ -31,11 +32,11 @@ const Application = () => {
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
     formData.append("resume", resume);
-    formData.append("jobId", id);
-
+    formData.append("projectId", id);
+    formData.append("cgpa", cgpa);
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+        "https://project-app-backend-1hcz.onrender.com/api/v1/application/post",
         formData,
         {
           withCredentials: true,
@@ -50,14 +51,15 @@ const Application = () => {
       setPhone("");
       setAddress("");
       setResume("");
+      setcgpa("");
       toast.success(data.message);
-      navigateTo("/job/getall");
+      navigateTo("/project/getall");
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
 
-  if (!isAuthorized || (user && user.role === "Employer")) {
+  if (!isAuthorized || (user && user.role === "Faculty")) {
     navigateTo("/");
   }
 
@@ -85,6 +87,12 @@ const Application = () => {
             onChange={(e) => setPhone(e.target.value)}
           />
           <input
+            type="number"
+            placeholder="Your CGPA"
+            value={cgpa}
+            onChange={(e) => setcgpa(e.target.value)}
+          />
+          <input
             type="text"
             placeholder="Your Address"
             value={address}
@@ -108,7 +116,9 @@ const Application = () => {
               style={{ width: "100%" }}
             />
           </div>
-          <button type="submit">Send Application</button>
+          <button type="submit" onClick={console.log("clicked")}>
+            Send Application
+          </button>
         </form>
       </div>
     </section>

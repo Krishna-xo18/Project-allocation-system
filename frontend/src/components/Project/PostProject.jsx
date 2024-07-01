@@ -3,54 +3,50 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
-const PostJob = () => {
+const PostProject = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [location, setLocation] = useState("");
   const [salaryFrom, setSalaryFrom] = useState("");
   const [salaryTo, setSalaryTo] = useState("");
-  const [fixedSalary, setFixedSalary] = useState("");
-  const [salaryType, setSalaryType] = useState("default");
 
+  const [cgpa, setcgpa] = useState("");
+  const [salaryType, setSalaryType] = useState("default");
+  const [duration, setduration] = useState("");
   const { isAuthorized, user } = useContext(Context);
 
-  const handleJobPost = async (e) => {
+  const handleProjectPost = async (e) => {
     e.preventDefault();
-    if (salaryType === "Fixed Salary") {
+    if (salaryType === "Unpaid") {
       setSalaryFrom("");
       setSalaryFrom("");
-    } else if (salaryType === "Ranged Salary") {
-      setFixedSalary("");
+    } else if (salaryType === "Paid") {
     } else {
       setSalaryFrom("");
       setSalaryTo("");
-      setFixedSalary("");
     }
     await axios
       .post(
-        "http://localhost:4000/api/v1/job/post",
-        fixedSalary.length >= 4
+        "https://project-app-backend-1hcz.onrender.com/api/v1/project/post",
+        salaryFrom.length >= 3
           ? {
               title,
               description,
               category,
               country,
-              city,
-              location,
-              fixedSalary,
+              duration,
+              cgpa,
+              salaryFrom,
+              salaryTo,
             }
           : {
               title,
               description,
               category,
               country,
-              city,
-              location,
-              salaryFrom,
-              salaryTo,
+              duration,
+              cgpa,
             },
         {
           withCredentials: true,
@@ -65,10 +61,11 @@ const PostJob = () => {
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+    navigateTo("/");
   };
 
   const navigateTo = useNavigate();
-  if (!isAuthorized || (user && user.role !== "Employer")) {
+  if (!isAuthorized || (user && user.role !== "Faculty")) {
     navigateTo("/");
   }
 
@@ -76,42 +73,47 @@ const PostJob = () => {
     <>
       <div className="job_post page">
         <div className="container">
-          <h3>POST NEW JOB</h3>
-          <form onSubmit={handleJobPost}>
+          <h3>POST NEW PROJECT</h3>
+          <form onSubmit={handleProjectPost}>
             <div className="wrapper">
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Job Title"
+                placeholder="Project title"
               />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select Category</option>
-                <option value="Graphics & Design">Graphics & Design</option>
-                <option value="Mobile App Development">
-                  Mobile App Development
-                </option>
-                <option value="Frontend Web Development">
-                  Frontend Web Development
-                </option>
-                <option value="MERN Stack Development">
-                  MERN STACK Development
+                <option value="Data science">Data science</option>
+                <option value="Web development">Web development</option>
+                <option value="Cloud computing">Cloud computing</option>
+                <option value="AI and machine learning">
+                  AI and machine learning
                 </option>
                 <option value="Account & Finance">Account & Finance</option>
-                <option value="Artificial Intelligence">
-                  Artificial Intelligence
+                <option value="Embedded Systems">Embedded Systems</option>
+                <option value="Mechanical Design">Mechanical Design.</option>
+                <option value="VLSI design">VLSI design</option>
+                <option value="Signal processing">Signal processing</option>
+                <option value="Digital image processing">
+                  Digital image processing
                 </option>
-                <option value="Video Animation">Video Animation</option>
-                <option value="MEAN Stack Development">
-                  MEAN STACK Development
+                <option value="Blockchain technology">
+                  Blockchain technology
                 </option>
-                <option value="MEVN Stack Development">
-                  MEVN STACK Development
+                <option value="Internet of Things (IoT)">
+                  Internet of Things (IoT)
                 </option>
-                <option value="Data Entry Operator">Data Entry Operator</option>
+                <option value="Robotics">Robotics</option>
+                <option value="Augmented Reality (AR)">
+                  Augmented Reality (AR)
+                </option>
+                <option value="Virtual Reality (VR)">
+                  Virtual Reality (VR)
+                </option>
               </select>
             </div>
             <div className="wrapper">
@@ -122,17 +124,17 @@ const PostJob = () => {
                 placeholder="Country"
               />
               <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="City"
+                type="Number"
+                value={cgpa}
+                onChange={(e) => setcgpa(e.target.value)}
+                placeholder="Enter Preferred CGPA"
               />
             </div>
             <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Location"
+              type="Number"
+              value={duration}
+              onChange={(e) => setduration(e.target.value)}
+              placeholder="Please Specify Duration of the Project"
             />
             <div className="salary_wrapper">
               <select
@@ -140,44 +142,37 @@ const PostJob = () => {
                 onChange={(e) => setSalaryType(e.target.value)}
               >
                 <option value="default">Select Salary Type</option>
-                <option value="Fixed Salary">Fixed Salary</option>
-                <option value="Ranged Salary">Ranged Salary</option>
+                <option value="Unpaid">Unpaid Project</option>
+                <option value="Paid">Stipend Project</option>
               </select>
               <div>
                 {salaryType === "default" ? (
-                  <p>Please provide Salary Type *</p>
-                ) : salaryType === "Fixed Salary" ? (
-                  <input
-                    type="number"
-                    placeholder="Enter Fixed Salary"
-                    value={fixedSalary}
-                    onChange={(e) => setFixedSalary(e.target.value)}
-                  />
-                ) : (
-                  <div className="ranged_salary">
+                  <p>Select Project Type: Paid or Unpaid *</p>
+                ) : salaryType === "Paid" ? (
+                  <div className="Paid">
                     <input
                       type="number"
-                      placeholder="Salary From"
+                      placeholder="Stipend From"
                       value={salaryFrom}
                       onChange={(e) => setSalaryFrom(e.target.value)}
                     />
                     <input
                       type="number"
-                      placeholder="Salary To"
+                      placeholder="Stipend To"
                       value={salaryTo}
                       onChange={(e) => setSalaryTo(e.target.value)}
                     />
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
             <textarea
               rows="10"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Job Description"
+              placeholder="Project Description"
             />
-            <button type="submit">Create Job</button>
+            <button type="submit">Create Project</button>
           </form>
         </div>
       </div>
@@ -185,4 +180,4 @@ const PostJob = () => {
   );
 };
 
-export default PostJob;
+export default PostProject;

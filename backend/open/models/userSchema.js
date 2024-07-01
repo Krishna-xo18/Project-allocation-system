@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,11 +29,23 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: [true, "Please select a role"],
-    enum: ["Job Seeker", "Employer"],
+    enum: ["Student", "Faculty"],
   },
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  currprojects: {
+    type: Number,
+    default: 0,
+  },
+  totalprojects: {
+    type: Number,
+    default: 0,
+  },
+  branch: {
+    type: String,
+    required: [true, "Please Select Branch or Department"],
   },
 });
 

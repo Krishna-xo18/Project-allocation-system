@@ -1,14 +1,14 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Application } from "../models/applicationSchema.js";
-import { Job } from "../models/jobSchema.js";
+import { Project } from "../models/projectSchema.js";
 import cloudinary from "cloudinary";
 
 export const postApplication = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Employer") {
+  if (role === "Faculty") {
     return next(
-      new ErrorHandler("Employer not allowed to access this resource.", 400)
+      new ErrorHandler("Faculty not allowed to access this resource.", 400)
     );
   }
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -33,22 +33,25 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     );
     return next(new ErrorHandler("Failed to upload Resume to Cloudinary", 500));
   }
-  const { name, email, coverLetter, phone, address, jobId } = req.body;
+  const { name, email, coverLetter, phone, address, projectId, cgpa } =
+    req.body;
   const applicantID = {
     user: req.user._id,
-    role: "Job Seeker",
+    role: "Student",
   };
-  if (!jobId) {
-    return next(new ErrorHandler("Job not found!", 404));
+  if (!projectId) {
+    return next(new ErrorHandler("Project not found!", 404));
   }
-  const jobDetails = await Job.findById(jobId);
-  if (!jobDetails) {
-    return next(new ErrorHandler("Job not found!", 404));
+  //const stu = await User.findById(req.user._id);
+  const branch = "ECE";
+  const projectDetails = await Project.findById(projectId);
+  if (!projectDetails) {
+    return next(new ErrorHandler("Project not found!", 404));
   }
 
-  const employerID = {
-    user: jobDetails.postedBy,
-    role: "Employer",
+  const facultyID = {
+    user: projectDetails.postedBy,
+    role: "Faculty",
   };
   if (
     !name ||
@@ -57,8 +60,9 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     !phone ||
     !address ||
     !applicantID ||
-    !employerID ||
-    !resume
+    !facultyID ||
+    !resume ||
+    !projectId
   ) {
     return next(new ErrorHandler("Please fill all fields.", 400));
   }
@@ -69,12 +73,16 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     phone,
     address,
     applicantID,
-    employerID,
+    facultyID,
+    projectId,
+    branch,
+    cgpa,
     resume: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,
     },
   });
+
   res.status(200).json({
     success: true,
     message: "Application Submitted!",
@@ -82,16 +90,16 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-export const employerGetAllApplications = catchAsyncErrors(
+export const facultyGetAllApplications = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
-    if (role === "Job Seeker") {
+    if (role === "Student") {
       return next(
-        new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+        new ErrorHandler("Student not allowed to access this resource.", 400)
       );
     }
     const { _id } = req.user;
-    const applications = await Application.find({ "employerID.user": _id });
+    const applications = await Application.find({ "facultyID.user": _id });
     res.status(200).json({
       success: true,
       applications,
@@ -99,14 +107,14 @@ export const employerGetAllApplications = catchAsyncErrors(
   }
 );
 
-export const jobseekerGetAllApplications = catchAsyncErrors(
+export const studentGetAllApplications = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
-    if (role === "Employer") {
-      return next(
-        new ErrorHandler("Employer not allowed to access this resource.", 400)
-      );
-    }
+    // if (role === "Faculty") {
+    //   return next(
+    //     new ErrorHandler("Faculty not allowed to access this resource.", 400)
+    //   );
+    // }
     const { _id } = req.user;
     const applications = await Application.find({ "applicantID.user": _id });
     res.status(200).json({
@@ -115,15 +123,29 @@ export const jobseekerGetAllApplications = catchAsyncErrors(
     });
   }
 );
-
-export const jobseekerDeleteApplication = catchAsyncErrors(
+export const studentGetSingleApplication = catchAsyncErrors(
   async (req, res, next) => {
-    const { role } = req.user;
-    if (role === "Employer") {
-      return next(
-        new ErrorHandler("Employer not allowed to access this resource.", 400)
-      );
+    const { id } = req.params;
+    const application = await Application.findById(id);
+    if (!application) {
+      new ErrorHandler("Application Not found", 400);
     }
+
+    res.status(200).json({
+      success: true,
+      application,
+    });
+  }
+);
+
+export const studentDeleteApplication = catchAsyncErrors(
+  async (req, res, next) => {
+    // const { role } = req.user;
+    // if (role === "Faculty") {
+    //   return next(
+    //     new ErrorHandler("Faculty not allowed to access this resource.", 400)
+    //   );
+    // }
     const { id } = req.params;
     const application = await Application.findById(id);
     if (!application) {

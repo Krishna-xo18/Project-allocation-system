@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/user/logout",
+        "https://project-app-backend-1hcz.onrender.com/api/v1/user/logout",
         {
           withCredentials: true,
         }
@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="logo">
-          <img src="/JobZee-logos__white.png" alt="logo" />
+          <img src="/lff.jpg" alt="logo" />
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>
@@ -39,32 +39,38 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/job/getall"} onClick={() => setShow(false)}>
-              ALL JOBS
+            <Link to={"/project/getall"} onClick={() => setShow(false)}>
+              ALL PROJECTS
             </Link>
           </li>
           <li>
             <Link to={"/applications/me"} onClick={() => setShow(false)}>
-              {user && user.role === "Employer"
+              {user && user.role === "Faculty"
                 ? "APPLICANT'S APPLICATIONS"
                 : "MY APPLICATIONS"}
             </Link>
           </li>
-          {user && user.role === "Employer" ? (
+          {user && user.role === "Faculty" ? (
             <>
               <li>
-                <Link to={"/job/post"} onClick={() => setShow(false)}>
-                  POST NEW JOB
+                <Link to={"/project/post"} onClick={() => setShow(false)}>
+                  POST NEW PROJECT
                 </Link>
               </li>
               <li>
-                <Link to={"/job/me"} onClick={() => setShow(false)}>
-                  VIEW YOUR JOBS
+                <Link to={"/project/me"} onClick={() => setShow(false)}>
+                  VIEW YOUR PROJECTS
                 </Link>
               </li>
             </>
           ) : (
-            <></>
+            <>
+              <li>
+                <Link to={"/projectstatus"} onClick={() => setShow(false)}>
+                  ALL FACULTIES STATUS
+                </Link>
+              </li>
+            </>
           )}
 
           <button onClick={handleLogout}>LOGOUT</button>

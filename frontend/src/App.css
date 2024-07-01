@@ -252,6 +252,7 @@ p {
   display: flex;
   height: 450px;
   margin-bottom: 1.75rem;
+  background-color: rgb(250, 250, 250);
 }
 .heroSection .container .title,
 .heroSection .container .image {
@@ -439,6 +440,15 @@ p {
   padding: 50px 0;
   gap: 35px;
 }
+.project_render {
+  min-width: 1500px;
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 50px 0;
+  gap: 35px;
+}
 .categories .banner {
   display: flex;
   flex-wrap: wrap;
@@ -455,7 +465,51 @@ p {
   gap: 12px;
   background: #f1f3f6;
 }
+.categories .banner_another {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 20px 0;
+}
+.project_render .banner_another {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 20px 0;
+}
+.project_render .banner_another .card {
+  width: 320px;
+  background: red;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f3f6;
+}
+.categories .banner_another .card {
+  width: 320px;
+  background: red;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f3f6;
+}
 .categories .banner .card:hover {
+  transition: all 0.3s;
+  box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+  -webkit-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+}
+.categories .banner_another .card:hover {
+  transition: all 0.3s;
+  box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+  -webkit-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
+}
+.categories .banner_another .card:hover {
   transition: all 0.3s;
   box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
   -webkit-box-shadow: 2px 10px 10px -1px rgba(0, 0, 0, 0.17);
@@ -470,11 +524,105 @@ p {
   align-items: center;
   justify-content: center;
 }
-.categories .banner .card .text p:nth-child(1) {
+.categories .banner .card .text h1 {
   font-size: 16px;
   font-weight: bold;
+  color: rgb(237, 12, 12);
 }
-.categories .banner .card .text p:nth-child(2) {
+.categories .banner .card .text p {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.categories .banner_another .card .text h1 {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(237, 12, 12);
+}
+.categories .banner_another .card .text a {
+  color: #007bff; /* Default link color */
+  text-decoration: none; /* Remove underline by default */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Link Hover State */
+.categories .banner_another .card .text a:hover {
+  color: #0056b3; /* Change color on hover */
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Visited Link Styling */
+.categories .banner_another .card .text a:visited {
+  color: #6c757d; /* Color for visited links */
+}
+
+/* Active Link Styling (when clicked) */
+.categories .banner_another .card .text a:active {
+  color: #0056b3; /* Color when link is active (clicked) */
+}
+
+/* Focus Link Styling (for keyboard navigation) */
+.categories .banner_another .card .text a:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* Optional: Add focus style */
+}
+.categories .banner_another .card .text p:nth-child(1) {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.categories .banner_another .card .text p:nth-child(2) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.categories .banner_another .card .text p:nth-child(3) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.categories .banner_another .card .text p:nth-child(4) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.categories .banner_another .card .text p:nth-child(5) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+
+.project_render .banner_another .card h1 {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(237, 12, 12);
+}
+.project_render .container .banner_another .card p:nth-child(1) {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.project_render .container .banner_another .card p:nth-child(2) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.project_render .container .banner_another .card p:nth-child(3) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.project_render .container .banner_another .card p:nth-child(4) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.project_render .container .banner_another .card .text p:nth-child(5) {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(10, 117, 184);
+}
+.c .categories .banner .card .text p:nth-child(2) {
   font-size: 14px;
   font-weight: 300;
   color: gray;
@@ -820,13 +968,23 @@ p {
   align-items: center;
   justify-content: center;
 }
-.job_seeker_card .btn_area button {
+.job_seeker_card .edit_btn_wrapper .edit_btn {
+  background: rgb(5, 202, 35);
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 2px;
+}
+.job_seeker_card .delete_btn {
   background: #d9534f;
   color: #fff;
   border: none;
   padding: 10px 30px;
   font-size: 20px;
   font-weight: 500;
+  margin: 2px;
 }
 @media (max-width: 1520px) {
   .my_applications .container {
