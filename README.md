@@ -92,7 +92,7 @@ Welcome to the Project Allocation System! This web application allows students t
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/your-username/project-allocation-system.git
+    git clone https://github.com/Krishna-xo18project-allocation-system.git
     ```
 
 2. **Navigate to the project directory**:
