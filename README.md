@@ -23,10 +23,10 @@ Welcome to the Project Allocation System! This web application allows students t
 
 ## Demo
 
-[Watch the demo video here]
 
 
-https://github.com/Krishna-xo18/Project-allocation-system/assets/117559604/b3d47bdd-ec74-4ee3-864e-733c7d479dbc
+https://github.com/Krishna-xo18/Project-allocation-system/assets/117559604/7949f882-42b1-41be-9d01-f1e2fe5943c6
+
 
 
 ## Installation
