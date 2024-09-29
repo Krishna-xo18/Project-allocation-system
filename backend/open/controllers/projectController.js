@@ -113,11 +113,7 @@ export const updateProject = catchAsyncErrors(async (req, res, next) => {
 
 export const deleteProject = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  // if (role === "Student") {
-  //   return next(
-  //     new ErrorHandler("Student not allowed to access this resource.", 400)
-  //   );
-  // }
+
   const { id } = req.params;
   const project = await Project.findById(id);
   const postedas = project.postedBy;
